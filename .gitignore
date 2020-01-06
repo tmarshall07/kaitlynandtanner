@@ -45,7 +45,7 @@ jspm_packages/
 dist
 
 # Images
-images
+/images
 
 # DS Store
 .DS_Store
