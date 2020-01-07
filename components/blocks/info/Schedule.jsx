@@ -1,22 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
-import { darken, transparentize } from 'polished';
+import { transparentize } from 'polished';
 import Block from '../../Block';
 import colors from '../../../helpers/colors';
+import { desktopMin } from '../../../helpers/breakpoints';
+
 import {
-  H1, H2, H3, P,
+  H2, H3, P,
 } from '../../../styles/typography';
 
 import {
-  Wrapper, Content, Image, Column,
+  Column,
 } from '../../../styles/page';
 
 const StyledColumn = styled(Column)`
-  max-width: 50%;
+  @media ${desktopMin} {
+    max-width: 50rem;
+  }
 `;
 
 const StyledP = styled(P)`
@@ -60,10 +63,6 @@ const FlexContainer = styled.div`
   display: flex;
 `;
 
-const openTab = () => {
-  window.open('https://finnegans.org/taproom/');
-};
-
 const events = [
   { time: '6:00pm', text: 'Ceremony', description: 'We\'ll be having a relatively short "ceremony" on the patio where we\'ll read our vows, exchange rings, and probably cry.' },
   { time: '6:30pm', text: 'Cocktail hour', description: 'Loosen up, enjoy some drinks, mingle, and play games (oh yes—there will be games).' },
@@ -86,7 +85,7 @@ const eventsComponents = events.map((event) => (
   </ItemContainer>
 ));
 
-function Location(props) {
+function Schedule() {
   return (
     <Block>
       <Container>
@@ -95,7 +94,7 @@ function Location(props) {
             <Icon icon={['fad', 'clipboard-list']} />
             Schedule
           </Header>
-          <StyledP>The approximate schedule of events. Don't be alarmed if there're slight deviations from the plan.</StyledP>
+          <StyledP>The approximate schedule of events. Don&apos;t be alarmed if there&apos;re slight deviations from the plan.</StyledP>
           {eventsComponents}
         </StyledColumn>
       </Container>
@@ -103,8 +102,8 @@ function Location(props) {
   );
 }
 
-Location.propTypes = {
+Schedule.propTypes = {
 
 };
 
-export default Location;
+export default Schedule;

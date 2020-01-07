@@ -11,18 +11,11 @@ import colors from '../helpers/colors';
 
 import { Wrapper, Content } from '../styles/page';
 
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const Divider = styled.div`
   margin: 2rem;
 
   height: 2px;
-  background: ${lighten(.45, colors.grey)};
+  background: ${lighten(0.45, colors.grey)};
 `;
 
 function Info() {

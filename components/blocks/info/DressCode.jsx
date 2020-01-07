@@ -1,22 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styled from 'styled-components';
-import { darken, transparentize } from 'polished';
 import Block from '../../Block';
-import colors from '../../../helpers/colors';
 import {
-  H1, H2, H3, P,
+  H2, P,
 } from '../../../styles/typography';
+import { desktopMin } from '../../../helpers/breakpoints';
 
 import {
-  Wrapper, Content, Image, Column,
+  Image, Column,
 } from '../../../styles/page';
 
 const StyledColumn = styled(Column)`
-  max-width: 50%;
+  @media ${desktopMin} {
+    max-width: 50rem;
+  }
 `;
 
 const StyledP = styled(P)`
@@ -40,11 +40,7 @@ const Container = styled.div`
   padding: 3rem;
 `;
 
-const FlexContainer = styled.div`
-  display: flex;
-`;
-
-function DressCode(props) {
+function DressCode() {
   return (
     <Block>
       <Container>
@@ -53,7 +49,7 @@ function DressCode(props) {
             <Icon icon={['fad', 'tshirt']} />
             Dress Code
           </Header>
-          <StyledP>We think the company and the celebration is way more important than worrying about clothes, hair, and makeup. That said, there&apos;s no explicit dress code. Wear whatever makes you feel comfortable! Here are some suggestions:</StyledP>
+          <StyledP>We think the company and the celebration is way more important than worrying about clothes, hair, and makeup. That said, there&apos;s no explicit dress code. Wear whatever makes you feel comfortable! Here&apos;re some suggestions:</StyledP>
           <Image>
             <img src="/images/dress-code.png" />
           </Image>

@@ -82,6 +82,7 @@ function Header() {
         h3 { font-size: 1.8rem; }
         h4 { font-size: 1.6rem; }
         h5 { font-size: 1.6rem; }
+        img { display: block }
       `}
       </style>
       <ActiveLink activeClassName="active blue" href="/">

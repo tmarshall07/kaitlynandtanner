@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ import elevations from '../../../helpers/elevations';
 import {
   Image,
 } from '../../../styles/page';
+import PopupImage from '../../PopupImage';
 
 const StyledImage = styled(Image)`
   height: 20rem;
@@ -40,21 +41,32 @@ const Container = styled.div`
   padding: 3rem;
 `;
 
-const numPhotos = 73;
-const images = [];
-for (let i = 0; i < numPhotos; i += 1) {
-  images.push(`https://kaitlynandtanner.s3.us-east-2.amazonaws.com/pics/thumbs/${i}.jpg`);
-}
-
-const thumbails = images.map((image) => (
-  <StyledImage>
-    <img alt="Selfie" src={image} />
-  </StyledImage>
-));
-
 function Images() {
+  const [largeImageSrc, setLargeImageSrc] = useState('');
+
+  const numPhotos = 73;
+  const images = [];
+  for (let i = 0; i < numPhotos; i += 1) {
+    images.push(`https://kaitlynandtanner.s3.us-east-2.amazonaws.com/pics/thumbs/${i}.jpg`);
+  }
+
+  const thumbails = images.map((image) => (
+    <StyledImage
+      key={image}
+      onClick={() => setLargeImageSrc(image)}
+    >
+      <img alt="Selfie" src={image} />
+    </StyledImage>
+  ));
+
   return (
     <Block>
+      {largeImageSrc && (
+        <PopupImage
+          handleHidePopup={() => setLargeImageSrc('')}
+          imageSrc={largeImageSrc}
+        />
+      )}
       <Container>
         {thumbails}
       </Container>
