@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import Block from '../../Block';
 import elevations from '../../../helpers/elevations';
+import { desktopMin } from '../../../helpers/breakpoints';
 
 import {
   Image,
@@ -11,7 +13,8 @@ import {
 import PopupImage from '../../PopupImage';
 
 const StyledImage = styled(Image)`
-  height: 20rem;
+  height: auto;
+  width: 100%;
   border-radius: 5px;
   overflow: hidden;
 
@@ -21,8 +24,18 @@ const StyledImage = styled(Image)`
 
   cursor: pointer;
   img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media ${desktopMin} {
+    height: 20rem;
     width: unset;
-    height: 100%;
+
+    img {
+      width: unset;
+      height: 100%;
+    }
   }
 
   :hover {
@@ -42,31 +55,40 @@ const Container = styled.div`
 `;
 
 function Images() {
+  const [popupVisible, setPopupVisible] = useState(false);
   const [largeImageSrc, setLargeImageSrc] = useState('');
 
-  const numPhotos = 73;
+  const numPhotos = 142;
   const images = [];
-  for (let i = 0; i < numPhotos; i += 1) {
+  for (let i = 1; i <= numPhotos; i += 1) {
     images.push(`https://kaitlynandtanner.s3.us-east-2.amazonaws.com/pics/thumbs/${i}.jpg`);
   }
 
-  const thumbails = images.map((image) => (
+  const handleImageClick = (image) => {
+    setLargeImageSrc(image);
+    setPopupVisible(true);
+  };
+
+  const thumbails = images.map((image, i) => (
     <StyledImage
       key={image}
-      onClick={() => setLargeImageSrc(image)}
+      // onClick={() => setLargeImageSrc(`https://kaitlynandtanner.s3.us-east-2.amazonaws.com/pics/originals/${i + 1}.jpg`)}
+      onClick={() => handleImageClick(image)}
     >
-      <img alt="Selfie" src={image} />
+      <LazyLoadImage
+        alt="Selfie"
+        src={image}
+      />
     </StyledImage>
   ));
 
   return (
     <Block>
-      {largeImageSrc && (
-        <PopupImage
-          handleHidePopup={() => setLargeImageSrc('')}
-          imageSrc={largeImageSrc}
-        />
-      )}
+      <PopupImage
+        handleHidePopup={() => setPopupVisible(false)}
+        popupVisible={popupVisible}
+        imageSrc={largeImageSrc}
+      />
       <Container>
         {thumbails}
       </Container>
