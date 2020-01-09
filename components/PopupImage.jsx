@@ -24,6 +24,14 @@ const Container = styled.div`
   `}
 `;
 
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+  z-index: 1;
+`;
+
 const Background = styled.div`
   width: 100%;
   height: 100%;
@@ -67,9 +75,11 @@ function PopupImage(props) {
         animIn={scale.in}
         animOut={scale.out}
       >
-        <Image>
-          <img alt="Selfie log" src={imageSrc} />
-        </Image>
+        <FlexContainer>
+          <Image>
+            <img alt="Selfie log" src={imageSrc} />
+          </Image>
+        </FlexContainer>
       </Animation>
       <Animation
         isVisible={popupVisible}
