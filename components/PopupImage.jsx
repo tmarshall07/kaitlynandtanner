@@ -11,6 +11,7 @@ const Container = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  left: 0;
   top: 0;
 
   display: flex;
@@ -44,7 +45,7 @@ const Background = styled.div`
   background: ${transparentize(0.5, 'black')};
 `;
 
-const Image = styled.div`
+const ImageContainer = styled.div`
   overflow: hidden;
   border-radius: 5px;
 
@@ -58,38 +59,53 @@ const Image = styled.div`
   }
 `;
 
-function PopupImage(props) {
-  const {
-    imageSrc,
-    handleHidePopup,
-    popupVisible,
-  } = props;
+class PopupImage extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <Container
-      onClick={handleHidePopup}
-      isVisible={popupVisible}
-    >
-      <Animation
+    this.imageRef = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log(this.imageRef.current);
+    // window.EXIF.getData(this.imageRef.current, function () {
+    //   console.log(EXIF.getTag('Make'));
+    // });
+  }
+
+  render() {
+    const {
+      imageSrc,
+      handleHidePopup,
+      popupVisible,
+    } = this.props;
+  
+    return (
+      <Container
+        onClick={handleHidePopup}
         isVisible={popupVisible}
-        animIn={scale.in}
-        animOut={scale.out}
       >
-        <FlexContainer>
-          <Image>
-            <img alt="Selfie log" src={imageSrc} />
-          </Image>
-        </FlexContainer>
-      </Animation>
-      <Animation
-        isVisible={popupVisible}
-        animIn={fade.in}
-        animOut={fade.out}
-      >
-        <Background />
-      </Animation>
-    </Container>
-  );
+        <Animation
+          isVisible={popupVisible}
+          animIn={scale.in}
+          animOut={scale.out}
+        >
+          <FlexContainer>
+            <ImageContainer>
+              <img ref={this.imageRef} alt="Selfie log" src={imageSrc} />
+            </ImageContainer>
+          </FlexContainer>
+        </Animation>
+        <Animation
+          isVisible={popupVisible}
+          animIn={fade.in}
+          animOut={fade.out}
+        >
+          <Background />
+        </Animation>
+      </Container>
+    );
+  }
 }
 
 PopupImage.propTypes = {

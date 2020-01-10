@@ -51,7 +51,11 @@ const Container = styled.div`
 
   flex-wrap: wrap;
 
-  padding: 3rem;
+  padding: 1rem;
+
+  @media ${desktopMin} {
+    padding: 3rem;
+  }
 `;
 
 function Images() {

@@ -67,6 +67,7 @@ function Header() {
         <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700&display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/ef00d42d41.js" crossOrigin="anonymous" />
         <script src="/libs/anime.min.js" />
+        <script src="/libs/exif.js" />
       </Head>
       <style jsx global>
         {`
